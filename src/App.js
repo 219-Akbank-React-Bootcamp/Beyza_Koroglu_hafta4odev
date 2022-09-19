@@ -67,6 +67,10 @@ function App() {
     todo.statu = statu;
   };
 
+  const deleteTodo = (todoID) => {
+    setTodos(todos.filter((todo) => todo.id !== todoID));
+  };
+
   return (
     <div className="App">
       <div className="FormBlock">
@@ -79,6 +83,7 @@ function App() {
           categories={categories}
           todos={todos}
           changeStatu={changeStatu}
+          deleteTodo={deleteTodo}
         />
       </div>
     </div>

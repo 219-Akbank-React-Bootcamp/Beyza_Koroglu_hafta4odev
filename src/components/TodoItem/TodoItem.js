@@ -14,6 +14,11 @@ function TodoItem(props) {
     setStatu(category.statusList.find((item) => e.target.value === item.id));
     props.changeStatu(props.todoItem.id, e.target.value);
   };
+
+  const handleClick = (e) => {
+    props.deleteTodo(props.todoItem.id);
+  };
+
   return (
     <li className="TodoItem" style={{ backgroundColor: background }}>
       <span>{props.todoItem.todo}</span>
@@ -30,7 +35,9 @@ function TodoItem(props) {
             </option>
           ))}
         </select>
-        <button className="DeleteTodo">X</button>
+        <button onClick={handleClick} className="DeleteTodo">
+          X
+        </button>
       </span>
     </li>
   );
