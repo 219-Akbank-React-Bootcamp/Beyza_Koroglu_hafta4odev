@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
 import "./App.css";
 import AddCategoryForm from "./components/AddCategoryForm";
 import AddTodoForm from "./components/AddTodoForm";
@@ -54,6 +55,18 @@ function App() {
     },
   ]);
 
+  const addTodo = (todo, category) => {
+    setTodos([
+      ...todos,
+      { id: uuid(), todo: todo, category: category, statu: "0" },
+    ]);
+  };
+
+  const changeStatu = (todoID, statu) => {
+    const todo = todos.find((todo) => todo.id === todoID);
+    todo.statu = statu;
+  };
+
   return (
     <div className="App">
       <div className="FormBlock">
@@ -61,8 +74,12 @@ function App() {
         <AddCategoryForm />
       </div>
       <div className="Todos">
-        <AddTodoForm categories={categories} />
-        <TodoList categories={categories} todos={todos} />
+        <AddTodoForm categories={categories} addTodo={addTodo} />
+        <TodoList
+          categories={categories}
+          todos={todos}
+          changeStatu={changeStatu}
+        />
       </div>
     </div>
   );

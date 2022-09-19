@@ -18,6 +18,7 @@ function TodoList(props) {
       <ul>
         {props.todos.map((todo) => (
           <TodoItem
+            changeStatu={props.changeStatu}
             key={todo.id}
             categories={props.categories}
             todoItem={todo}

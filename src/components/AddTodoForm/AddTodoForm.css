@@ -10,6 +10,8 @@
   border: 2px solid rgb(175, 175, 175);
   border-radius: 20px;
   margin-top: 5px;
+  padding: 0 20px;
+  font-size: 16px;
 }
 
 .AddTodoSelect {
@@ -19,6 +21,7 @@
   margin-top: 5px;
   margin-left: 100px;
   border: 2px solid rgb(175, 175, 175);
+  padding: 0 10px;
 }
 
 .AddTodoButton {
