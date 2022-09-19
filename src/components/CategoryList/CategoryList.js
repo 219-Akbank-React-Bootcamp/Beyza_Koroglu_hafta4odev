@@ -1,4 +1,5 @@
 import React from "react";
+import CategoryItem from "../CategoryItem";
 import "./CategoryList.css";
 
 function CategoryList(props) {
@@ -7,13 +8,11 @@ function CategoryList(props) {
       <h2>Kategori Listesi</h2>
       <ul>
         {props.categories.map((category) => (
-          <li className="Category" key={category.id}>
-            <span>{category.category}</span>
-            <span className="CategoryListButtons">
-              <button className="EditButton">Düzenle</button>
-              <button className="DeleteButton">Sil</button>
-            </span>
-          </li>
+          <CategoryItem
+            key={category.id}
+            category={category}
+            deleteCategory={props.deleteCategory}
+          />
         ))}
       </ul>
     </div>

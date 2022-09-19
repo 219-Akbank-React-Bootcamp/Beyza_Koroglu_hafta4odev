@@ -71,10 +71,15 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== todoID));
   };
 
+  const deleteCategory = (categoryID) => {
+    setCategories(categories.filter((category) => category.id !== categoryID));
+    setTodos(todos.filter((todo) => todo.category !== categoryID));
+  };
+
   return (
     <div className="App">
       <div className="FormBlock">
-        <CategoryList categories={categories} />
+        <CategoryList categories={categories} deleteCategory={deleteCategory} />
         <AddCategoryForm />
       </div>
       <div className="Todos">
