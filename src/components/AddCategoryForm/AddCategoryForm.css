@@ -1,0 +1,64 @@
+.AddCategoryForm {
+  background-color: white;
+  border: 2px solid rgb(175, 175, 175);
+  width: 300px;
+  margin: auto;
+  margin-top: 25px;
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+
+.AddCategoryForm > form > ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.AddCategoryFormLi {
+  width: 250px;
+  margin: auto;
+  padding: 0 15px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: rgb(175, 175, 175);
+}
+
+.CategoryInput {
+  width: 250px;
+  height: 25px;
+  border-style: none;
+  outline: none;
+  margin-top: 15px;
+}
+
+.CategorySelect {
+  width: 100px;
+  height: 25px;
+  border-radius: 20px;
+  margin-top: 15px;
+  border: none;
+  outline: none;
+}
+
+.StatuInput {
+  width: 200px;
+  height: 25px;
+  border-style: none;
+  outline: none;
+  margin-top: 15px;
+}
+
+.ColorButton {
+  border: none;
+  background-color: white;
+  padding: 0;
+  width: 40px;
+}
+
+.AddCategoryButton {
+  width: 100px;
+  height: 25px;
+  border-radius: 20px;
+  margin-top: 15px;
+  border: 2px solid rgb(175, 175, 175);
+}
