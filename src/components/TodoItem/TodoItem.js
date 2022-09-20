@@ -16,7 +16,12 @@ function TodoItem(props) {
   };
 
   const handleClick = (e) => {
-    props.deleteTodo(props.todoItem.id);
+    if (
+      window.confirm(
+        `Todo: ${props.todoItem.todo}\nSilmek istediğinizden emin misiniz?`
+      )
+    )
+      props.deleteTodo(props.todoItem.id);
   };
 
   return (

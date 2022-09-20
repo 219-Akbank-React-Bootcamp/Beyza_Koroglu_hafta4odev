@@ -72,8 +72,18 @@ function App() {
   };
 
   const deleteCategory = (categoryID) => {
-    setCategories(categories.filter((category) => category.id !== categoryID));
-    setTodos(todos.filter((todo) => todo.category !== categoryID));
+    if (
+      window.confirm(
+        `${
+          todos.filter((todo) => todo.category === categoryID).length
+        } adet Todo silinecek.\nKategoriyi silmek istediğinizden emin misiniz?`
+      )
+    ) {
+      setCategories(
+        categories.filter((category) => category.id !== categoryID)
+      );
+      setTodos(todos.filter((todo) => todo.category !== categoryID));
+    }
   };
 
   return (
