@@ -3,6 +3,10 @@ import CategoryItem from "../CategoryItem";
 import "./CategoryList.css";
 
 function CategoryList(props) {
+  const handleClick = () => {
+    props.displayAddCategory();
+  };
+
   return (
     <div className="CategoryList">
       <h2>Kategori Listesi</h2>
@@ -15,6 +19,9 @@ function CategoryList(props) {
           />
         ))}
       </ul>
+      <button onClick={handleClick} className="AddCategoryButton">
+        Kategori ekle
+      </button>
     </div>
   );
 }

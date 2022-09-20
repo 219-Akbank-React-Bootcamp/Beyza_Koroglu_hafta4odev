@@ -28,18 +28,20 @@ function TodoItem(props) {
     <li className="TodoItem" style={{ backgroundColor: background }}>
       <span>{props.todoItem.todo}</span>
       <span className="TodoItemRight">
-        <select
-          defaultValue={props.todoItem.statu}
-          className="TodoSelect"
-          onChange={handleChange}
-        >
-          <option value="0"></option>
-          {category.statusList.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.statu}
-            </option>
-          ))}
-        </select>
+        {category.statusList.length > 0 && (
+          <select
+            defaultValue={props.todoItem.statu}
+            className="TodoSelect"
+            onChange={handleChange}
+          >
+            <option value="0"></option>
+            {category.statusList.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.statu}
+              </option>
+            ))}
+          </select>
+        )}
         <button onClick={handleClick} className="DeleteTodo">
           X
         </button>

@@ -55,6 +55,8 @@ function App() {
     },
   ]);
 
+  const [displayAC, setDisplayAC] = useState(false);
+
   const addTodo = (todo, category) => {
     setTodos([
       ...todos,
@@ -86,11 +88,25 @@ function App() {
     }
   };
 
+  const displayAddCategory = () => {
+    setDisplayAC(!displayAC);
+  };
+
+  const addCategory = (categoryName) => {
+    setCategories([
+      ...categories,
+      { id: uuid(), category: categoryName, statusList: [] },
+    ]);
+  };
+
   return (
     <div className="App">
       <div className="FormBlock">
-        <CategoryList categories={categories} deleteCategory={deleteCategory} />
-        <AddCategoryForm />
+        <CategoryList
+          categories={categories}
+          deleteCategory={deleteCategory}
+          displayAddCategory={displayAddCategory}
+        />
       </div>
       <div className="Todos">
         <AddTodoForm categories={categories} addTodo={addTodo} />
@@ -101,6 +117,12 @@ function App() {
           deleteTodo={deleteTodo}
         />
       </div>
+      {displayAC && (
+        <AddCategoryForm
+          displayAddCategory={displayAddCategory}
+          addCategory={addCategory}
+        />
+      )}
     </div>
   );
 }
