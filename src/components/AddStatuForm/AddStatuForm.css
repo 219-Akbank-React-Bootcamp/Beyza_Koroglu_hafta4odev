@@ -1,11 +1,6 @@
-.AddCategoryFormBackground {
+.AddStatuForm {
   position: absolute;
-  z-index: 1;
-  width: calc(100vw - 200px);
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.85);
-}
-.AddCategoryForm {
+  z-index: 2;
   background-color: white;
   border: 2px solid rgb(175, 175, 175);
   width: 300px;
@@ -18,13 +13,13 @@
   transform: translate(-50%, -50%);
 }
 
-.AddCategoryForm > form > ul {
+.AddStatuForm > form > ul {
   list-style-type: none;
   padding: 0;
   text-align: left;
 }
 
-.AddCategoryFormLi {
+.AddStatuFormLi {
   width: 250px;
   margin: auto;
   padding: 0 15px;
@@ -33,7 +28,7 @@
   border-color: rgb(175, 175, 175);
 }
 
-.CategoryInput {
+.StatuInput {
   width: 250px;
   height: 25px;
   border-style: none;
@@ -41,7 +36,7 @@
   margin-top: 15px;
 }
 
-.AddCategoryButton {
+.AddStatuButton {
   width: 100px;
   height: 25px;
   border-radius: 20px;

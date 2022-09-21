@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./TodoItem.css";
 
 function TodoItem(props) {
   const category = props.categories.find(
     (category) => category.id === props.todoItem.category
   );
+
+  useEffect(() => {
+    setStatu(
+      category.statusList.find((item) => props.todoItem.statu === item.id)
+    );
+  }, [props.categories]);
+
   const [statu, setStatu] = useState(
     category.statusList.find((item) => props.todoItem.statu === item.id)
   );
@@ -30,7 +37,7 @@ function TodoItem(props) {
       <span className="TodoItemRight">
         {category.statusList.length > 0 && (
           <select
-            defaultValue={props.todoItem.statu}
+            value={props.todoItem.statu}
             className="TodoSelect"
             onChange={handleChange}
           >

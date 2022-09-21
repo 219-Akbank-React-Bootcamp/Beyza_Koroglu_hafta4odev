@@ -16,6 +16,8 @@ function CategoryList(props) {
             key={category.id}
             category={category}
             deleteCategory={props.deleteCategory}
+            displayEditCategory={props.displayEditCategory}
+            specifyEditCategory={props.specifyEditCategory}
           />
         ))}
       </ul>

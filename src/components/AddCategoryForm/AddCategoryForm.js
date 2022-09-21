@@ -10,8 +10,11 @@ function AddCategoryForm(props) {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    props.displayAddCategory();
-    props.addCategory(categoryName);
+    if (categoryName === "") alert("Kategori ismi boş bırakılamaz.");
+    else {
+      props.displayAddCategory();
+      props.addCategory(categoryName);
+    }
   };
 
   const handleCansel = (e) => {

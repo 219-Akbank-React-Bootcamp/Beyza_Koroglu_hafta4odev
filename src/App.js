@@ -4,58 +4,18 @@ import "./App.css";
 import AddCategoryForm from "./components/AddCategoryForm";
 import AddTodoForm from "./components/AddTodoForm";
 import CategoryList from "./components/CategoryList";
+import EditCategoryForm from "./components/EditCategoryForm";
 import TodoList from "./components/TodoList";
 
 function App() {
-  const [categories, setCategories] = useState([
-    {
-      id: "1",
-      category: "Eğitim",
-      statusList: [
-        { id: "1", statu: "ders saati belirlendi", color: "green" },
+  const [categories, setCategories] = useState([]);
 
-        { id: "2", statu: "ders başladı", color: "red" },
+  const [todos, setTodos] = useState([]);
 
-        { id: "3", statu: "dersteyiz", color: "yellow" },
-
-        { id: "4", statu: "ders bitti ödevverildi", color: "pink" },
-
-        { id: "5", statu: "ödevler kontrol edildi", color: "purple" },
-      ],
-    },
-    {
-      id: "2",
-      category: "Ev işi",
-      statusList: [
-        { id: "1", statu: "iş henüz başlamadı", color: "red" },
-
-        { id: "2", statu: "iş başladı", color: "blue" },
-
-        { id: "3", statu: "iş yapılıyor", color: "yellow" },
-
-        { id: "4", statu: "iş bitmek üzere", color: "pink" },
-
-        { id: "5", statu: "iş bitti", color: "gray" },
-      ],
-    },
-  ]);
-
-  const [todos, setTodos] = useState([
-    {
-      id: "1",
-      todo: "React öğren",
-      category: "1",
-      statu: "0",
-    },
-    {
-      id: "2",
-      todo: "Evi temizle",
-      category: "2",
-      statu: "3",
-    },
-  ]);
+  const [editCategory, setEditCategory] = useState("");
 
   const [displayAC, setDisplayAC] = useState(false);
+  const [displayEC, setDisplayEC] = useState(false);
 
   const addTodo = (todo, category) => {
     setTodos([
@@ -92,10 +52,43 @@ function App() {
     setDisplayAC(!displayAC);
   };
 
+  const displayEditCategory = () => {
+    setDisplayEC(!displayEC);
+  };
+
   const addCategory = (categoryName) => {
     setCategories([
       ...categories,
       { id: uuid(), category: categoryName, statusList: [] },
+    ]);
+  };
+
+  const specifyEditCategory = (categoryID) => {
+    setEditCategory(categoryID);
+  };
+
+  const editCategoryAndStatus = (newCategory, deletedStatus) => {
+    const oldCategory = categories.find(
+      (category) => category.id === editCategory
+    );
+
+    deletedStatus.forEach((deletedStatu) => {
+      let indexOfDeleted = oldCategory.statusList.findIndex(
+        (statu) => statu.id === deletedStatu
+      );
+      todos.forEach((todo) => {
+        if (
+          todo.category === editCategory &&
+          todo.statu === deletedStatu &&
+          oldCategory.statusList[indexOfDeleted + 1]
+        ) {
+          todo.statu = oldCategory.statusList[indexOfDeleted + 1].id;
+        }
+      });
+    });
+    setCategories([
+      ...categories.filter((category) => category.id !== editCategory),
+      newCategory,
     ]);
   };
 
@@ -106,6 +99,8 @@ function App() {
           categories={categories}
           deleteCategory={deleteCategory}
           displayAddCategory={displayAddCategory}
+          displayEditCategory={displayEditCategory}
+          specifyEditCategory={specifyEditCategory}
         />
       </div>
       <div className="Todos">
@@ -121,6 +116,14 @@ function App() {
         <AddCategoryForm
           displayAddCategory={displayAddCategory}
           addCategory={addCategory}
+        />
+      )}
+      {displayEC && (
+        <EditCategoryForm
+          displayEditCategory={displayEditCategory}
+          editCategory={editCategory}
+          categories={categories}
+          editCategoryAndStatus={editCategoryAndStatus}
         />
       )}
     </div>

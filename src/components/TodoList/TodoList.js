@@ -26,7 +26,6 @@ function TodoList(props) {
 
   const handleChangeStatu = (e) => {
     setFilterStatu(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
