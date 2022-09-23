@@ -7,16 +7,16 @@ function StatuItem(props) {
 
   const handleStatuNameChange = (e) => {
     setStatu({ ...statu, statu: e.target.value });
-    props.handleCategoryStatuChange({ ...statu, statu: e.target.value });
+    props.onCategoryStatuChange({ ...statu, statu: e.target.value });
   };
 
   const handleStatuColorChange = (e) => {
     setStatu({ ...statu, color: e.target.value });
-    props.handleCategoryStatuChange({ ...statu, color: e.target.value });
+    props.onCategoryStatuChange({ ...statu, color: e.target.value });
   };
 
   const handleClick = () => {
-    props.handleDeleteStatu(statu.id);
+    props.onDeleteStatu(statu.id);
   };
 
   return (

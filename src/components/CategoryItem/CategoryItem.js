@@ -3,12 +3,11 @@ import "./CategoryItem.css";
 
 function CategoryItem(props) {
   const handleEdit = () => {
-    props.specifyEditCategory(props.category.id);
-    props.displayEditCategory();
+    props.onClickEdit();
   };
 
   const handleDelete = () => {
-    props.deleteCategory(props.category.id);
+    props.onDeleteCategory(props.category.id);
   };
 
   return (

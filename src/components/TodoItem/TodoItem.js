@@ -19,16 +19,16 @@ function TodoItem(props) {
 
   const handleChange = (e) => {
     setStatu(category.statusList.find((item) => e.target.value === item.id));
-    props.changeStatu(props.todoItem.id, e.target.value);
+    props.onChangeStatu(props.todoItem.id, e.target.value);
   };
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     if (
       window.confirm(
         `Todo: ${props.todoItem.todo}\nSilmek istediğinizden emin misiniz?`
       )
     )
-      props.deleteTodo(props.todoItem.id);
+      props.onDeleteTodo(props.todoItem.id);
   };
 
   return (

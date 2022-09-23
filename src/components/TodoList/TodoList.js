@@ -61,8 +61,8 @@ function TodoList(props) {
       <ul>
         {todos.map((todo) => (
           <TodoItem
-            deleteTodo={props.deleteTodo}
-            changeStatu={props.changeStatu}
+            onDeleteTodo={props.onDeleteTodo}
+            onChangeStatu={props.onChangeStatu}
             key={todo.id}
             categories={props.categories}
             todoItem={todo}

@@ -12,14 +12,14 @@ function AddCategoryForm(props) {
     e.preventDefault();
     if (categoryName === "") alert("Kategori ismi boş bırakılamaz.");
     else {
-      props.displayAddCategory();
-      props.addCategory(categoryName);
+      props.onClose();
+      props.onAddCategory(categoryName);
     }
   };
 
-  const handleCansel = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
-    props.displayAddCategory();
+    props.onClose();
   };
 
   return (
@@ -40,7 +40,7 @@ function AddCategoryForm(props) {
           <button onClick={handleAdd} className="AddCategoryButton">
             Ekle
           </button>
-          <button onClick={handleCansel} className="AddCategoryButton">
+          <button onClick={handleCancel} className="AddCategoryButton">
             İptal
           </button>
         </form>

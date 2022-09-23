@@ -23,7 +23,7 @@ function AddTodoForm(props) {
         warning += "\nKategori seçiniz.\nEğer yoksa kategori ekleyiniz.";
       alert(warning);
     } else {
-      props.addTodo(todo, category);
+      props.onAddTodo(todo, category);
       setTodo("");
       setCategory("");
     }

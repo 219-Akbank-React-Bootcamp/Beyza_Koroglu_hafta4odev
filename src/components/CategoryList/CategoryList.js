@@ -4,9 +4,12 @@ import "./CategoryList.css";
 
 function CategoryList(props) {
   const handleClick = () => {
-    props.displayAddCategory();
+    props.onOpenAddCategory();
   };
 
+  const handleClickEdit = (id) => {
+    props.onClickEditCategory(id);
+  };
   return (
     <div className="CategoryList">
       <h2>Kategori Listesi</h2>
@@ -15,9 +18,10 @@ function CategoryList(props) {
           <CategoryItem
             key={category.id}
             category={category}
-            deleteCategory={props.deleteCategory}
-            displayEditCategory={props.displayEditCategory}
-            specifyEditCategory={props.specifyEditCategory}
+            onDeleteCategory={props.onDeleteCategory}
+            onClickEdit={() => {
+              handleClickEdit(category.id);
+            }}
           />
         ))}
       </ul>

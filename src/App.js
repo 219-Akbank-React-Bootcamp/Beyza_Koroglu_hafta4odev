@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { v4 as uuid } from "uuid";
 import "./App.css";
 import AddCategoryForm from "./components/AddCategoryForm";
@@ -17,23 +17,23 @@ function App() {
   const [displayAC, setDisplayAC] = useState(false);
   const [displayEC, setDisplayEC] = useState(false);
 
-  const addTodo = (todo, category) => {
+  const handleAddTodo = (todo, category) => {
     setTodos([
       ...todos,
       { id: uuid(), todo: todo, category: category, statu: "0" },
     ]);
   };
 
-  const changeStatu = (todoID, statu) => {
+  const handleChangeStatu = (todoID, statu) => {
     const todo = todos.find((todo) => todo.id === todoID);
     todo.statu = statu;
   };
 
-  const deleteTodo = (todoID) => {
+  const handleDeleteTodo = (todoID) => {
     setTodos(todos.filter((todo) => todo.id !== todoID));
   };
 
-  const deleteCategory = (categoryID) => {
+  const handleDeleteCategory = (categoryID) => {
     if (
       window.confirm(
         `${
@@ -48,26 +48,27 @@ function App() {
     }
   };
 
-  const displayAddCategory = () => {
+  const handleDisplayAddCategory = () => {
     setDisplayAC(!displayAC);
   };
 
-  const displayEditCategory = () => {
+  const handleDisplayEditCategory = () => {
     setDisplayEC(!displayEC);
   };
 
-  const addCategory = (categoryName) => {
+  const handleAddCategory = (categoryName) => {
     setCategories([
       ...categories,
       { id: uuid(), category: categoryName, statusList: [] },
     ]);
   };
 
-  const specifyEditCategory = (categoryID) => {
-    setEditCategory(categoryID);
+  const handleClickEditCategory = (id) => {
+    setEditCategory(id);
+    setDisplayEC(true);
   };
 
-  const editCategoryAndStatus = (newCategory, deletedStatus) => {
+  const handleEditCategoryAndStatus = (newCategory, deletedStatus) => {
     const oldCategory = categories.find(
       (category) => category.id === editCategory
     );
@@ -92,38 +93,40 @@ function App() {
     ]);
   };
 
+  const currentCategory = useMemo(() => {
+    return categories.find((category) => category.id === editCategory);
+  }, [editCategory, categories]);
+
   return (
     <div className="App">
       <div className="FormBlock">
         <CategoryList
           categories={categories}
-          deleteCategory={deleteCategory}
-          displayAddCategory={displayAddCategory}
-          displayEditCategory={displayEditCategory}
-          specifyEditCategory={specifyEditCategory}
+          onDeleteCategory={handleDeleteCategory}
+          onOpenAddCategory={handleDisplayAddCategory}
+          onClickEditCategory={handleClickEditCategory}
         />
       </div>
       <div className="Todos">
-        <AddTodoForm categories={categories} addTodo={addTodo} />
+        <AddTodoForm categories={categories} onAddTodo={handleAddTodo} />
         <TodoList
           categories={categories}
           todos={todos}
-          changeStatu={changeStatu}
-          deleteTodo={deleteTodo}
+          onChangeStatu={handleChangeStatu}
+          onDeleteTodo={handleDeleteTodo}
         />
       </div>
       {displayAC && (
         <AddCategoryForm
-          displayAddCategory={displayAddCategory}
-          addCategory={addCategory}
+          onClose={handleDisplayAddCategory}
+          onAddCategory={handleAddCategory}
         />
       )}
       {displayEC && (
         <EditCategoryForm
-          displayEditCategory={displayEditCategory}
-          editCategory={editCategory}
-          categories={categories}
-          editCategoryAndStatus={editCategoryAndStatus}
+          onClose={handleDisplayEditCategory}
+          currentCategory={currentCategory}
+          onEditCategoryAndStatus={handleEditCategoryAndStatus}
         />
       )}
     </div>

@@ -10,14 +10,14 @@ function AddStatuForm(props) {
     e.preventDefault();
     if (statu === "") alert("Durum boş bırakılamaz.");
     else {
-      props.handleAddStatu();
-      props.addStatu(statu);
+      props.onClose();
+      props.onAddStatu(statu);
     }
   };
 
-  const handleCansel = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
-    props.handleAddStatu();
+    props.onClose();
   };
 
   return (
@@ -37,7 +37,7 @@ function AddStatuForm(props) {
         <button onClick={handleAdd} className="AddStatuButton">
           Ekle
         </button>
-        <button onClick={handleCansel} className="AddStatuButton">
+        <button onClick={handleCancel} className="AddStatuButton">
           İptal
         </button>
       </form>

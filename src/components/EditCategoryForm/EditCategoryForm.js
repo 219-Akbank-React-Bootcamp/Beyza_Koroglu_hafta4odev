@@ -9,13 +9,7 @@ function EditCategoryForm(props) {
 
   const [deletedStatus, setDeletedStatus] = useState([]);
 
-  const [category, setCategory] = useState(
-    JSON.parse(
-      JSON.stringify(
-        props.categories.find((category) => category.id === props.editCategory)
-      )
-    )
-  );
+  const [category, setCategory] = useState(props.currentCategory);
 
   const handleCategoryNameChange = (e) => {
     setCategory({ ...category, category: e.target.value });
@@ -40,11 +34,11 @@ function EditCategoryForm(props) {
     setCategory({ ...category, statusList: statusList });
   };
 
-  const handleAddStatu = (e) => {
+  const handleDisplayAddStatu = (e) => {
     setDisplayAddStatu(!displayAddStatu);
   };
 
-  const addStatu = (statu) => {
+  const handleAddStatu = (statu) => {
     const newStatu = { id: uuid(), statu: statu, color: "" };
     setCategory({
       ...category,
@@ -54,13 +48,13 @@ function EditCategoryForm(props) {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    props.editCategoryAndStatus(category, deletedStatus);
-    props.displayEditCategory();
+    props.onEditCategoryAndStatus(category, deletedStatus);
+    props.onClose();
   };
 
-  const handleCansel = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
-    props.displayEditCategory();
+    props.onClose();
   };
 
   return (
@@ -83,14 +77,14 @@ function EditCategoryForm(props) {
               <StatuItem
                 key={statu.id}
                 statu={statu}
-                handleCategoryStatuChange={handleCategoryStatuChange}
-                handleDeleteStatu={handleDeleteStatu}
+                onCategoryStatuChange={handleCategoryStatuChange}
+                onDeleteStatu={handleDeleteStatu}
               />
             ))}
             <li style={{ textAlign: "center" }}>
               <button
                 type="button"
-                onClick={handleAddStatu}
+                onClick={handleDisplayAddStatu}
                 className="EditCategoryButton"
               >
                 Durum ekle
@@ -100,12 +94,15 @@ function EditCategoryForm(props) {
           <button onClick={handleEdit} className="EditCategoryButton">
             Kaydet
           </button>
-          <button onClick={handleCansel} className="EditCategoryButton">
+          <button onClick={handleCancel} className="EditCategoryButton">
             İptal
           </button>
         </form>
         {displayAddStatu && (
-          <AddStatuForm handleAddStatu={handleAddStatu} addStatu={addStatu} />
+          <AddStatuForm
+            onClose={handleDisplayAddStatu}
+            onAddStatu={handleAddStatu}
+          />
         )}
       </div>
     </div>
